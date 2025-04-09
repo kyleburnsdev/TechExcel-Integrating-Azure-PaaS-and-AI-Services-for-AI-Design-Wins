@@ -8,6 +8,7 @@ def get_hotels():
     """Return a list of hotels from the API."""
     api_endpoint = st.secrets["api"]["endpoint"]
     response = requests.get(f"{api_endpoint}/Hotels", timeout=10)
+    print(response.text)
     return response
 
 @st.cache_data
@@ -15,6 +16,7 @@ def get_hotel_bookings(hotel_id):
     """Return a list of bookings for the specified hotel."""
     api_endpoint = st.secrets["api"]["endpoint"]
     response = requests.get(f"{api_endpoint}/Hotels/{hotel_id}/Bookings", timeout=10)
+    print(response.text)
     return response
 
 @st.cache_data
@@ -22,6 +24,7 @@ def invoke_chat_endpoint(question):
     """Invoke the chat endpoint with the specified question."""
     api_endpoint = st.secrets["api"]["endpoint"]
     response = requests.post(f"{api_endpoint}/Chat", data={"message": question}, timeout=10)
+    print(response.text)
     return response
 
 def main():
@@ -40,7 +43,9 @@ def main():
     )
 
     # Display the list of hotels as a drop-down list
-    hotels_json = get_hotels().json()
+    hotels = get_hotels
+    print(hotels.text)
+    hotels_json = hotels.json()
     # Reshape hotels to an object with hotelID and hotelName
     hotels = [{"id": hotel["hotelID"], "name": hotel["hotelName"]} for hotel in hotels_json]
     
