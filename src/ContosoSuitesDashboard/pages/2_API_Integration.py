@@ -43,7 +43,7 @@ def main():
     )
 
     # Display the list of hotels as a drop-down list
-    hotels = get_hotels
+    hotels = get_hotels()
     print(hotels.text)
     hotels_json = hotels.json()
     # Reshape hotels to an object with hotelID and hotelName
